@@ -2,20 +2,19 @@
 """
 gbk_to_gff.py
 
-Converte um (ou vários) arquivo(s) GenBank (.gbk/.gbff) para GFF3.
+Converts one (or several) GenBank (.gbk/.gbff) files to GFF3.
 
-Uso:
-    python3 gbk_to_gff.py input.gbk -o output.gff
+Usage:python3 gbk_to_gff.py input.gbk -o output.gff
 
-Opções principais:
-    -o, --output    Arquivo de saída GFF3 (padrão: stdout)
-    --fasta         Anexa as sequências FASTA ao final do GFF (##FASTA)
-    -s, --source    Campo source no GFF (padrão: "GenBank")
-
-Notas:
-- Requer Biopython (pip install biopython).
-- Preserva atributos úteis: ID (locus_tag or generated), Name (gene/product), product, gene, locus_tag, db_xref.
-- Tenta atribuir Parent para CDS/ mRNA apontando para gene quando possível.
+Main options:
+    -o, --output GFF3 output file (default: stdout)
+    --fasta Appends FASTA sequences to the end of the GFF (##FASTA)
+    -s, --source Source field in GFF (default: “GenBank”)
+    
+Notes:
+- Requires Biopython (pip install biopython).
+- Preserves useful attributes: ID (locus_tag or generated), Name (gene/product), product, gene, locus_tag, db_xref.
+- Attempts to assign Parent to CDS/mRNA pointing to gene when possible.
 
 """
 

@@ -4,9 +4,10 @@ A Python script to convert **GenBank (.gbk/.gbff)** files into **GFF3**, preserv
 
 ---
 ✨ **Author**  
-Andrei Giacchetto Felice  
+Andrei Giacchetto Felice 
 
 Laboratory of Immunology and Omics Sciences (LimCom)
+
 ---
 
 ## 📌 Overview

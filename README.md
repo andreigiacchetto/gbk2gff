@@ -3,12 +3,6 @@
 A Python script to convert **GenBank (.gbk/.gbff)** files into **GFF3**, preserving essential annotation information and ensuring compatibility with downstream tools such as **Panaroo**, **Roary**, **Prokka**, and various pangenome analysis pipelines.
 
 ---
-## ✨ **Author**  
-Andrei Giacchetto Felice 
-
-Laboratory of Immunology and Omics Sciences (LimCom)
-
----
 
 ## 📌 Overview
 
@@ -115,3 +109,10 @@ contig0001	GenBank	CDS	100	900	.	+	0	ID=ABC_001_cds;Parent=ABC_001;product=prote
 ## 📄 License
 This project is freely available for academic and scientific use.  
 For commercial use, please contact the author.
+
+---
+## ✨ **Author**  
+Andrei Giacchetto Felice 
+
+Laboratory of Immunology and Omics Sciences (LimCom)
+

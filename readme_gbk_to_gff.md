@@ -1,114 +1,106 @@
-# 🧬 gbk_to_gff.py
+🧬 gbk_to_gff.py
 
-Um script em Python para converter arquivos **GenBank (.gbk/.gbff)** para **GFF3**, preservando informações essenciais de anotação e garantindo compatibilidade com ferramentas downstream como **Panaroo**, **Roary**, **Prokka** e pipelines de pangenômica.
+A Python script to convert GenBank (.gbk/.gbff) files into GFF3, preserving essential annotation information and ensuring compatibility with downstream tools such as Panaroo, Roary, Prokka, and various pangenome analysis pipelines.
 
----
 ✨ Author
 Andrei Giacchetto Felice
 
 Laboratory of Immunology and Omics Sciences (LimCom)
----
+📌 Overview
 
-## 📌 Visão Geral
+The GenBank format is extremely rich in detail but not always convenient for pangenome workflows or annotation pipelines that require the GFF3 format.
+This script converts GBK/GBFF files into a standardized GFF3 file while maintaining gene integrity, coordinates, product information, and metadata.
 
-O formato GenBank é extremamente rico em detalhes, mas nem sempre prático para análises de pangenômica ou pipelines de anotação que exigem o formato **GFF3**. Este script converte arquivos GBK/GBFF em GFF3 padronizado, mantendo integridade dos genes, coordenadas, produtos e metadados.
+📚 About the GFF3 Format
 
-## 📚 Sobre o Formato GFF3
+GFF3 (General Feature Format) is widely used for genome annotation. Each line describes a feature (gene, CDS, tRNA, etc.) using its type, position, strand, and attributes.
 
-O formato **GFF3 (General Feature Format)** é amplamente utilizado para anotação genômica. Cada linha descreve uma feature (gene, CDS, tRNA, etc.) com: posição, fita, tipo e atributos.
+This script generates a fully valid GFF3 file including:
 
-O script produz um GFF3 totalmente válido contendo:
-- `##gff-version 3`
-- `##sequence-region`
-- Features: `gene`, `CDS`, `tRNA`, `rRNA`, etc.
-- Atributos standard: `ID`, `Name`, `product`, `db_xref`, `Parent`, entre outros
-- Suporte opcional a FASTA incorporado
+##gff-version 3
 
----
+##sequence-region
 
-## 🔢 Instalação
+Features such as gene, CDS, tRNA, rRNA, etc.
 
-O script depende apenas do **Biopython**:
+Standard attributes: ID, Name, product, db_xref, Parent, and others
 
-```bash
+Optional embedded FASTA section
+
+🔢 Installation
+
+The script only depends on Biopython:
+
 pip install biopython
-```
 
-Clone ou copie o arquivo `gbk2gff.py` para o seu projeto.
 
----
+Clone or copy the file gbk2gff.py into your project.
 
-## ▶️ Uso
+▶️ Usage
+Convert a single GBK file to GFF3:
+python3 gbk2gff.py input.gbk -o output.gff
 
-### **Converter um arquivo GBK para GFF3:**
-```bash
-python3 gbk2gff.py entrada.gbk -o saida.gff
-```
+Convert multiple GBK files into a single GFF:
+python3 gbk2gff.py *.gbk -o merged.gff
 
-### **Converter múltiplos GBK em um único GFF:**
-```bash
-python3 gbk2gff.py *.gbk -o combinados.gff
-```
+Generate GFF with embedded FASTA:
+python3 gbk2gff.py input.gbk -o output.gff --fasta
 
-### **Gerar GFF + FASTA embutido:**
-```bash
-python3 gbk2gff.py entrada.gbk -o saida.gff --fasta
-```
+Print GFF directly to the terminal:
+python3 gbk2gff.py file.gbk
 
-### **Saída no terminal:**
-```bash
-python3 gbk2gff.py arquivo.gbk
-```
+🧠 Features
+✔ Preserves key annotation fields
 
----
+locus_tag
 
-## 🧠 Funcionalidades
+gene
 
-### ✔ Preserva atributos essenciais
-- `locus_tag`
-- `gene`
-- `product`
-- `db_xref`
-- `note`
-- `inference`
+product
 
-### ✔ IDs consistentes
-Se o GBK não tiver `locus_tag`, IDs são gerados automaticamente (`gene_1`, `feat_1`, etc.).
+db_xref
 
-### ✔ Parent automático
-O script detecta sobreposição entre features para criar relações:
-- `CDS → gene`
-- `mRNA → gene` (quando aplicável)
+note
 
-### ✔ Cálculo de phase (para CDS)
-Compatível com ferramentas downstream que usam codificação de fase de códon.
+inference
 
-### ✔ Suporte a localizações compostas (CompoundLocation)
-Trabalha corretamente com genes fragmentados ou exons múltiplos.
+✔ Consistent IDs
 
-### ✔ FASTA opcional embutido
-Inclui um bloco `##FASTA` ao final do arquivo GFF3.
+If a GBK entry has no locus_tag, the script automatically generates IDs (gene_1, feat_1, etc.).
 
----
+✔ Automatic Parent assignment
 
-## 📜 Exemplo de Entrada (GenBank)
+The script detects feature overlap to infer biological relationships:
 
-```
+CDS → gene
+
+mRNA → gene (when applicable)
+
+✔ Phase calculation (for CDS)
+
+Compatible with downstream tools that require codon phase information.
+
+✔ Full support for CompoundLocation
+
+Correctly handles fragmented genes and multi-exon structures.
+
+✔ Optional embedded FASTA
+
+Adds a ##FASTA block at the end of the GFF3 file.
+
+📜 Example Input (GenBank)
 LOCUS       contig0001  2450 bp DNA linear
 FEATURES             Location/Qualifiers
      gene            100..900
                      /locus_tag="ABC_001"
      CDS             100..900
                      /product="protein X"
-```
 
-### 🔄 Saída equivalente em GFF3
-```
+🔄 Equivalent Output in GFF3
 contig0001	GenBank	gene	100	900	.	+	.	ID=ABC_001;Name=ABC_001
 contig0001	GenBank	CDS	100	900	.	+	0	ID=ABC_001_cds;Parent=ABC_001;product=protein X
-```
-
----
 
 📄 License
-This project is freely available for academic and scientific use. For commercial use, please contact the author.
+
+This project is freely available for academic and scientific use.
+For commercial use, please contact the author.

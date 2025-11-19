@@ -1,4 +1,4 @@
-# 🧬 gbk_to_gff.py
+# 🧬 gbk2gff.py
 
 A Python script to convert **GenBank (.gbk/.gbff)** files into **GFF3**, preserving essential annotation information and ensuring compatibility with downstream tools such as **Panaroo**, **Roary**, **Prokka**, and various pangenome analysis pipelines.
 
